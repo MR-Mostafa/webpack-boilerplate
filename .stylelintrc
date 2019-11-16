@@ -1,0 +1,13 @@
+{
+  "extends": ["stylelint-config-standard", "stylelint-prettier/recommended"],
+  "plugins": [
+    "stylelint-scss"
+  ],
+  "rules": {
+    scss/at-rule-no-unknown: true,
+    at-rule-no-unknown: null,
+    "indentation": "tab",
+    "max-empty-lines": 3,
+    "number-max-precision": 3,
+  }
+}
