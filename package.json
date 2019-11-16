@@ -6,7 +6,7 @@
 		"npm": ">= 6.13.0"
 	},
 	"private": true,
-	"description": "Webpack 4 Boilerplate with Babel, SASS or SCSS, Less, browser autoprefixer, dev server and etc.",
+	"description": "Webpack 4 Boilerplate with Babel, SASS or SCSS, Less, typescript, browser autoprefixer, dev server and etc.",
 	"main": "index.js",
 	"scripts": {
 		"build:dev": "webpack --mode=development",
