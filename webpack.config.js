@@ -20,10 +20,11 @@ const RemoveFileAfterBuild = [];
  */
 const copyStaticFile = [];
 
-// entry webpack
+/**
+ * entry webpack
+ */
 const entry = {
-	main: './src/js/entry/main.js',
-	// Insert other script files here ...
+	// Insert script files here ...
 };
 
 
