@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <% if (htmlWebpackPlugin.options.mode === 'production') { %><%= require('html-loader!./general/style.html') %><% } %>
+        <title>webpack4 boilerplate</title>
+    </head>
+    <body>
+
+        <!-- Enter the continuation code here -->
+
+
+        <% if (htmlWebpackPlugin.options.staticFile.length > 0) { %><% for (let static in htmlWebpackPlugin.options.staticFile) { %><%= htmlWebpackPlugin.options.staticFile[static] %><% } %><% } %>
+        <% if (htmlWebpackPlugin.options.mode === 'production') { %><%= require('html-loader!./general/script.html') %><% } %>
+    </body>
+</html>
