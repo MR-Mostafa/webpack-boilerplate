@@ -1,0 +1,3 @@
+- First, move all of this folder's to the root of the project, and then execute the following command:
+    - `npm install`
+    - `npm run build:prod` or `npm run build:dev`
