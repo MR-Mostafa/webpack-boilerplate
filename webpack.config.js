@@ -8,20 +8,32 @@ const CopyPlugin = require('copy-webpack-plugin');
 
 
 /**
- * This variable represents the file name in './src/js' that remove after buile.
+ * This variable represents the file name in './src/js' that remove after build.
  * With this feature you can delete unnecessary files.
- * this plugin works in 'production' mode
+ * this feature works in only 'production' mode
+ *  e.g: const RemoveFileAfterBuild = ['file1.js', 'file2.js'];
  */
 const RemoveFileAfterBuild = [];
 
 /**
  * If you want to copy a file (files) without changing it during of the build,
- * You must complete this variable
+ * You must complete this variable. These files are copied to the build folder.
+ * e.g:
+        const copyStaticFile = [
+            { from: './src/js/script.js', to: './js/script.js' },
+            { from: './src/css/style.css', to: './css/style.css' },
+            { from: './src/LICENSE.txt', to: './LICENSE.txt' },
+        ];
  */
 const copyStaticFile = [];
 
 /**
- * entry webpack
+ * entry webpack (The point or points where to start the application bundling process.)
+ * e.g:
+        const entry = {
+            index: './src/js/entry/index.js',
+            single: './src/js/entry/single.js',
+        };
  */
 const entry = {
 	// Insert script files here ...
