@@ -23,29 +23,29 @@ This is a lightweight foundation for your next webpack based frontend project.
 
 ## Folder Structure:
 ```
-|-- webpack.config.js
-|-- package.json
-|-- src
-    |-- fonts
-    |-- images
-    |-- js
-    |-- layouts
-        |-- index.html (main template)
-        |-- general
-            |-- style.html (your style)
-            |-- script.html (your script)
-    |-- less
-        |-- components
-        |-- responsive
-    |-- sass
-        |-- components
-        |-- responsive
-|-- build
-    |-- css
-    |-- fonts
-    |-- images
-    |-- js
-    |-- index.html
+├── webpack.config.js
+├── package.json
+├── src
+|    ├── fonts
+|    ├── images
+|    ├── js
+|    ├── layouts
+|    |    ├── index.html (main template)
+|    |    └── general
+|    |        ├──  style.html (your style)
+|    |        └──  script.html (your script)
+|    ├── less
+|    |    ├── components
+|    |    └── responsive
+|    └── sass
+|        ├── components
+|        └── responsive
+└── build
+    ├── css
+    ├── fonts
+    ├── images
+    ├── js
+    └── index.html
   ```
   
 ## Auto Creation of HTML files:
