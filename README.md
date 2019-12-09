@@ -35,11 +35,8 @@ This is a lightweight foundation for your next webpack based frontend project.
 |    |        ├──  style.html (your style)
 |    |        └──  script.html (your script)
 |    ├── less
-|    |    ├── components
-|    |    └── responsive
 |    └── sass
-|        ├── components
-|        └── responsive
+|
 └── build
     ├── css
     ├── fonts
