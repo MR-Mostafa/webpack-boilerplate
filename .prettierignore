@@ -1,8 +1,0 @@
-**/dist/
-**/vendor/
-/_gh_pages/
-/package.js
-**/build/
-**/node_modules/
-/src/*.html
-/src/layouts/*.html
