@@ -4,6 +4,30 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const RemoveBuildFile = require('remove-files-webpack-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
+
+
+/**
+ * This variable represents the file name in './src/js' that remove after buile.
+ * With this feature you can delete unnecessary files.
+ * this plugin works in 'production' mode
+ */
+const RemoveFileAfterBuild = [];
+
+/**
+ * If you want to copy a file (files) without changing it during of the build,
+ * You must complete this variable
+ */
+const copyStaticFile = [];
+
+// entry webpack
+const entry = {
+	main: './src/js/entry/main.js',
+	// Insert other script files here ...
+};
+
+
+
 
 /**
  *
@@ -19,17 +43,47 @@ const base64Options = {
 };
 
 /**
- * This variable represents the file name in './src/js' that remove after buile.
- * With this feature you can delete unnecessary files.
- * this plugin works in 'production' mode
- */
-const RemoveFileAfterBuild = [];
-
-/**
  * This variable represents the mode configuration of the plugin 'HtmlWebpackPlugin'
- * If is equal 'development', It will not import css files into html output.
+ * If is equal 'development', It will not import css and javascript files into html output. (when compile)
+ *
+ * The default 'StaticFile' variable is false(an empty array), But If the 'copyStaticFile' variable has a value (copyStaticFile.lenght > 0)
+ * And is also a development mode, the first condition is set and the for loop is applied.
+ * Now if the extension of one of the 'copyStaticFile[i].to' valuse ends with js or css,
+ * the value of the 'StaticFile' variable will be true(An array of value)
+ * That value will be automatically added before the close body tag.
+ *
+ * 'excludeChunks' variable Allows we to skip some chunks (e.g don't add the unit-test chunk)
+ * This variable only works in development mode and it's automatically work with 'RemoveFileAfterBuild' variable.
  */
-const HtmlWebpackPlugin_mode = process.env.NODE_ENV;
+const mode = process.env.NODE_ENV;
+
+let staticFile = [];
+if(process.env.NODE_ENV === 'development' && copyStaticFile.length > 0){
+    // first add style
+    for(let i = 0, len = copyStaticFile.length; i < len; i++){
+        if(/\.css$/.test(copyStaticFile[i].to)){
+            staticFile.push(`<link rel="stylesheet" href="${copyStaticFile[i].to}">`);
+        };
+    }
+
+    // then add js
+    for(let i = 0, len = copyStaticFile.length; i < len; i++){
+        if(/\.js$/.test(copyStaticFile[i].to)){
+            staticFile.push(`<script src="${copyStaticFile[i].to}"></script>`);
+        };
+    }
+}
+
+let excludeChunks = [];
+if(process.env.NODE_ENV === 'development' &&  RemoveFileAfterBuild.length > 0){
+    for(let i = RemoveFileAfterBuild.length; i--;){
+        if(/\.js$/.test(RemoveFileAfterBuild[i])){
+            // remove extention (main.js ==> main)
+            excludeChunks.push(RemoveFileAfterBuild[i].substr(0 , RemoveFileAfterBuild[i].length-3));
+        };
+    }
+}
+
 
 /**
  *
@@ -37,15 +91,15 @@ const HtmlWebpackPlugin_mode = process.env.NODE_ENV;
  *
  */
 const config = {
-    entry: {
-        // main: './src/js/main.js',
-        font: './src/js/base/font.js',
-        // Insert other script files here ...
-    },
+    entry: entry,
 
     output: {
         path: path.resolve(__dirname, 'build'),
         filename: 'js/[name].js',
+    },
+
+    performance: {
+        maxAssetSize: 1024000 // 1 MB
     },
 
     stats: 'errors-warnings',
@@ -79,27 +133,20 @@ const config = {
 
     plugins: [
         new HtmlWebpackPlugin({
-            title: 'Roocket Page',
-            template: './src/layouts/template/main.html',
+            template: './src/layouts/index.html',
             filename: 'index.html',
-            inject: false,
-            chunks: [],
-            themeSetting: {
-                isDevelopment: HtmlWebpackPlugin_mode,
-                fontface: true,
-                body: {
-                    classes: '',
-                },
-            },
-            files: {
-                styles: [],
-                scripts: [],
-            },
+            inject: mode  === 'production' ? false : true,
+            chunks: mode  === 'production' ? [] : true,
+            excludeChunks: excludeChunks,
+            mode: mode,
+            staticFile: staticFile,
         }),
+
+        new CopyPlugin(copyStaticFile),
 
         new FriendlyErrorsWebpackPlugin({
             compilationSuccessInfo: {
-                messages: ['Your application is running here http://localhost:3000'],
+                messages: ['Your application is running here http://localhost:3000 (Only for watch mode)'],
             },
         }),
 
@@ -110,6 +157,17 @@ const config = {
         new CleanWebpackPlugin(),
     ],
 };
+
+
+
+
+
+
+
+
+
+
+
 
 /**
  *
