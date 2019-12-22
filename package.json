@@ -5,7 +5,6 @@
         "node": ">= 12.13.0",
         "npm": ">= 6.13.0"
     },
-    "private": true,
     "description": "Webpack 4 Boilerplate with Babel, TypeScript, SASS or SCSS, Less, browser autoprefixer, image compressor, dev server and etc.",
     "main": "index.js",
     "scripts": {
