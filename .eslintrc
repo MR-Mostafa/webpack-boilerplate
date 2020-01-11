@@ -1,7 +1,8 @@
 {
 	"root": true,
 	"parser": "babel-eslint",
-	"extends": ["airbnb", "plugin:node/recommended"],
+	"extends": ["airbnb", "prettier", "plugin:node/recommended"],
+	"plugin": ["prettier"],
 	"env": {
 		"es6": true,
 		"browser": true,
@@ -17,11 +18,12 @@
 		}
 	},
 	"rules": {
+		"prettier/prettier": "error",
 		"space-before-function-paren": ["error", "never"],
 		"indent": ["error", "tab"],
 		"semi": ["error", "always"],
 		"quotes": ["error", "single"],
-		"no-console": "off",
+		"no-console": "warn",
 		"no-alert": "warn",
 		"func-names": "off",
 		"no-plusplus": "off",
@@ -36,6 +38,12 @@
 		"node/no-unpublished-require": 0,
 		"node/no-missing-require": 0,
         "node/no-unsupported-features/es-syntax": 0,
-        "no-tabs": ["error", {"allowIndentationTabs": true }]
+        "no-tabs": ["error", {"allowIndentationTabs": true }],
+		no-underscore-dangle: ["error", { "allow": ["_id"] }],
+		"arrow-parens": ["error", "always"],
+		"class-methods-use-this": "off",
+		"prefer-destructuring": ["error", {"object": true, "array": false}],
+		"no-unused-vars": ["error", { "argsIgnorePattern": "req|res|next|val" }],
+		"consistent-return": "off",
 	}
 }
